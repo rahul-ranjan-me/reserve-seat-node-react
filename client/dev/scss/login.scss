@@ -1,0 +1,83 @@
+.loginBox{
+	width: 500px;
+    background: #000;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.loginBox{
+	h3{
+		font-size:20px;
+		margin-bottom:10px;
+	}
+
+	p{
+		margin-bottom:10px;
+	}
+
+	p:last-child{
+		margin-bottom:0;
+	}
+
+	p {
+		input{
+			width:98%;
+			display:block;
+			height:20px;
+			padding:5px;
+			border-radius:5px;
+			border:1px solid #666;
+		}
+
+		button{
+			background:green;
+			float:right;
+			color:#fff;
+			padding:10px;
+			border:none;
+			border-radius:7px;
+			font-size:15px;
+			text-shadow:1px #666;
+			width:100px;
+			margin:10px auto 0;
+			display:block;
+			cursor:pointer;
+		}
+		input[type="checkbox"]{
+			width:auto;
+			display:inline-block;
+			vertical-align:middle;
+		}
+	}
+
+	div.register{
+		display:block;
+		clear:both;
+		background:#1f1f1f;
+		padding:10px;
+		margin-top:10px;
+	}
+
+	div.register{
+		a{
+			color:#fff
+		}
+	}
+
+	div.error{
+	    padding: 10px;
+	    background: #6b2611;
+	    border-radius: 5px;
+	    margin-bottom: 10px;
+	}
+}
+
+.profilePic {
+	margin-bottom:10px;
+	
+	input:first-child{
+		opacity:1 !important;
+	}
+}
+
