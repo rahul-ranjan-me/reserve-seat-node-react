@@ -29,7 +29,7 @@ router.post('/register', (req, res) => {
 			}
 
 			passport.authenticate('local')(req, res, () => {
-				if(!req.files.profilePic){
+				if(!req.files || !req.files.profilePic){
 					return res.status(200).json({status: 'Registration Successful!'});
 				}
 
