@@ -1,4 +1,4 @@
 .idea
 node_modules
-mongodb
-profilePics
+mongodb/data
+profilePics/dafa
