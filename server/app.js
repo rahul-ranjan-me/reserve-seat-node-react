@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
 	LocalStrategy = require('passport-local').Strategy;
 	config = require('./config');
 
-mongoose.connect('mongodb://10.129.11.249:27017/inventories');
+mongoose.connect(config.mongoUrl);
 
 var db = mongoose.connection;
 

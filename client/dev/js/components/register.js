@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
 import properties from '../config';
-import FileInput from 'react-file-input';
 
 require('../../scss/login.scss');
 
@@ -71,11 +70,7 @@ export default class Login extends Component{
 					</label>
 				</p>
 				<div className="profilePic">
-					 <FileInput name="myImage"
-	                   accept=".png,.gif,.jpg,.jpeg"
-	                   placeholder="Upload your profile pic"
-	                   className="inputClass"
-	                   onChange={this.myProfilePic} />
+					 <input type="file" className="inputClass" onChange={this.myProfilePic} />
 	            </div>
 				<p>
 					<label htmlFor="isAdmin">

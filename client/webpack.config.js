@@ -5,7 +5,7 @@ module.exports = {
     devServer: {
         inline: true,
         contentBase: './src',
-        host:'10.129.11.249',
+        host:'localhost',
         port: 4000,
         historyApiFallback: true
     },
@@ -15,7 +15,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                loaders: ['babel'],
+                loaders: ['babel-loader'],
                 exclude: /node_modules/
             },
             {
@@ -29,7 +29,7 @@ module.exports = {
         ]
     },
     output: {
-        path: 'src',
+        path: '/src',
         filename: 'js/bundle.min.js'
     },
     plugins: [
