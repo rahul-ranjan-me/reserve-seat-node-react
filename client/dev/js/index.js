@@ -10,6 +10,7 @@ import ChooseSeat from './components/chooseSeat';
 import Inventory from './components/inventory';
 import Login from './components/login';
 import Register from './components/register';
+import Profile from './components/profile';
 
 const store = createStore(allReducers);
 
@@ -18,6 +19,7 @@ ReactDOM.render(
 		<Router history={browserHistory}>
             <Route path="/" component={Layout}>
                 <IndexRoute component={ChooseSeat} />
+                <Route path="profile" component={Profile} />
                 <Route path="register" component={Register} />
                 <Route path="login" component={Login} />
                 <Route path="chooseSeat" component={ChooseSeat} />

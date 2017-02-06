@@ -20,7 +20,15 @@ router.post('/register', (req, res) => {
 		{
 			username: req.body.username, 
 			admin: req.body.admin,
-			name: req.body.name
+			firstName: req.body.firstName,
+			lastName: req.body.lastName,
+			birthMonth: req.body.birthMonth,
+			birthDay: req.body.birthDay,
+			birthYear: req.body.birthYear,
+			gender: req.body.gender,
+			mobile: req.body.mobile,
+			email: req.body.email,
+			location: req.body.location
 		}
 	),
 		req.body.password, (err, user) => {
@@ -33,16 +41,16 @@ router.post('/register', (req, res) => {
 					return res.status(200).json({status: 'Registration Successful!'});
 				}
 
-					var profilePic = req.files.profilePic,
-						fileType = profilePic.name.substr(profilePic.name.lastIndexOf('.'), profilePic.name.length);
+				var profilePic = req.files.profilePic,
+					fileType = profilePic.name.substr(profilePic.name.lastIndexOf('.'), profilePic.name.length);
 
-					profilePic.mv(config.fileUploadURL+req.body.username+fileType, function(err) {
-						if (err) {
-							res.status(500).send(err);
-						}else {
-							return res.status(200).json({status: 'Registration Successful!'});
-						}
-					});
+				profilePic.mv(config.fileUploadURL+req.body.username+fileType, function(err) {
+					if (err) {
+						res.status(500).send(err);
+					}else {
+						return res.status(200).json({status: 'Registration Successful!'});
+					}
+				});
 				
 			});
 	});
@@ -68,11 +76,25 @@ router.post('/login', (req, res, next) => {
 			}
 
 			var token = Verify.getToken(user);
-
 			res.status(200).json({
 				status: 'Login Successful!',
 				success: true,
-				token: token
+				token: token,
+				id: user._id,
+				userDetails: {
+					id: user._id,
+					admin: user.admin,
+					birthday: user.birthday,
+					birthMonth: user.birthMonth,
+					birthYear: user.birthYear,
+					email: user.email,
+					firstName: user.firstName,
+					lastName: user.lastName,
+					gender: user.gender,
+					location: user.location,
+					mobile: user.mobile,
+					username: user.username
+				}
 			})
 		})
 	})(req, res, next);
@@ -84,5 +106,13 @@ router.get('/logout', (req, res) => {
 		status: 'Bye!'
 	});
 });
+
+router.route('/:username')
+	.get((req, res, next) => {
+		User.findById(req.params.username, (err, user) => {
+			if(err) throw err;
+			res.json(user);
+		});
+	});
 
 module.exports = router;

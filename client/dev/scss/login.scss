@@ -1,7 +1,7 @@
 .loginBox{
 	width: 500px;
     background: #000;
-    margin: 10% auto;
+    margin: 10px auto;
     padding: 20px;
     border-radius: 10px;
 }
@@ -12,22 +12,44 @@
 		margin-bottom:10px;
 	}
 
-	p{
-		margin-bottom:10px;
+	.control{
+		margin-bottom:15px;
 	}
 
-	p:last-child{
+	.control:last-child{
 		margin-bottom:0;
 	}
 
-	p {
-		input{
+	.control {
+		label{
+			font-size: 13px;
+		    display: block;
+		    margin-bottom: 5px;
+		    color: rgba(255,255,255,.6);
+		}
+
+		.input{
 			width:98%;
 			display:block;
 			height:20px;
 			padding:5px;
 			border-radius:5px;
 			border:1px solid #666;
+			background:#313131;
+			color:rgba(255,255,255,.9);
+		}
+
+		.input-inline{
+			width:30%;
+			display:inline-block;
+			margin-right:15px;
+		}
+
+		.select-inline{
+			width:36%;
+			display:inline-block;
+			margin-right:15px;
+			float:left;
 		}
 
 		button{
@@ -44,11 +66,20 @@
 			display:block;
 			cursor:pointer;
 		}
+
 		input[type="checkbox"]{
 			width:auto;
 			display:inline-block;
 			vertical-align:middle;
 		}
+
+		.inputClass{
+			display:block;
+		}
+	}
+
+	.control.birthday .input-inline{
+		width:25%
 	}
 
 	div.register{
@@ -71,6 +102,17 @@
 	    border-radius: 5px;
 	    margin-bottom: 10px;
 	}
+
+	.Select-control{
+		background-color: #313131;
+		border-color: #666;
+		color:rgba(255,255,255,.9);
+	}
+
+	.has-value.Select--single > .Select-control .Select-value .Select-value-label, .has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label{
+		color:rgba(255,255,255,.9);
+	}
+
 }
 
 .profilePic {

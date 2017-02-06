@@ -47,6 +47,7 @@ export default class Header extends Component {
 			success: function(result){
 				if(result.status){
 					window.sessionStorage.setItem('token', null);
+					window.sessionStorage.setItem('userId', null);
 					window.location.href = "/login";
 				}
 	    	}
@@ -59,6 +60,9 @@ export default class Header extends Component {
 				<ul>
 					{this.state.links.map(this.createLinksWrapper)}
 					<li className="logout" onClick={this.logout}><span>Logout</span></li>
+					<li>
+						<Link to='profile'>Profile</Link>
+					</li>
 				</ul>
 			</nav>
 		)

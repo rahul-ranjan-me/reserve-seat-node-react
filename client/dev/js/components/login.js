@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router';
 import $ from 'jquery';
+import { browserHistory } from 'react-router';
 import properties from '../config';
 
 
@@ -27,7 +28,9 @@ export default class Login extends Component{
 				this.setState({'showError': false})
 				if(result.success){
 					window.sessionStorage.setItem('token', result.token);
-					window.location.href = "/chooseSeat";
+					window.sessionStorage.setItem('userId', result.id);
+					properties.userDetails = result.userDetails;
+					browserHistory.push('/chooseSeat');
 				}
 	    	},
 	    	error: (status)=>{
@@ -48,19 +51,19 @@ export default class Login extends Component{
  					</div>: null
 				}
 
-				<p>
+				<div className="control">
 					<label htmlFor="username">
-						<input id="username" ref="username" placeholder="Username" type="text" />
+						<input className="input" id="username" ref="username" placeholder="Username" type="text" />
 					</label>
-				</p>
-				<p>
+				</div>
+				<div className="control">
 					<label htmlFor="password">
-						<input id="password" ref="password" placeholder="Password" type="password" />
+						<input className="input" id="password" ref="password" placeholder="Password" type="password" />
 					</label>
-				</p>
-				<p className="clearfix">
+				</div>
+				<div className="control clearfix">
 					<button type="submit" onClick={this.loginMe}>Login</button>
-				</p>
+				</div>
 
 				<div className="register clearfix">
 					<Link to="register">Click here to register</Link>
