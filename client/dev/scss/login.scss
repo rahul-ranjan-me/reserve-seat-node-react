@@ -4,6 +4,7 @@
     margin: 10px auto;
     padding: 20px;
     border-radius: 10px;
+    position:relative;
 }
 
 .loginBox{
@@ -128,3 +129,11 @@
 	}
 }
 
+.profilePicture{
+	width: 100px;
+    height: 100px;
+    position: absolute;
+    right: 5px;
+    border-radius: 60px;
+    top: 5px;
+}

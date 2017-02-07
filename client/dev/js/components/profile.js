@@ -13,6 +13,7 @@ export default class Profile extends Component{
 		this.monthSelect = this.monthSelect.bind(this);
 		this.locationSelect = this.locationSelect.bind(this);
 		this.updateProfile = this.updateProfile.bind(this);
+		this.myProfilePic = this.myProfilePic.bind(this);
 
 		this.state = {
 			'isEdit' : false,
@@ -26,6 +27,10 @@ export default class Profile extends Component{
 		]
 	}
 
+	myProfilePic(event){
+		this.myProfilePicFile = event.target.files[0];
+	}
+
 	monthSelect(month){
 		this.setState({birthMonth: month.value});
 	}
@@ -36,7 +41,9 @@ export default class Profile extends Component{
 
 	updateProfile(e){
 		e.preventDefault();
+		
 		let formData = new FormData();
+		formData.append("profilePic", this.myProfilePicFile);
 		formData.append("id" , this.state.userDetails._id);
 		this.form.map((field) => {
 			if(typeof field === 'object'){
@@ -47,25 +54,26 @@ export default class Profile extends Component{
 		});
 
 		$.ajax({
-			url: properties.users+'/registerfff',
-			method: 'post',
+			url: properties.users+'/'+window.sessionStorage.getItem('userId'),
+			method: 'put',
 			data : formData,
 			processData: false,
     		contentType: false,
-			success: function(result){
-				if(result.status === "Registration Successful!"){
-					browserHistory.push('/login');
-				}else{
-					alert('some error occured');
-				}
+    		headers : {
+				"x-access-token": window.sessionStorage.getItem('token')
+			},
+			success: (result) => {
+				properties.userDetails = result;
+				this.setState({userDetails: result});
+				this.setState({'birthMonth': result.birthMonth});
+				this.setState({'location': result.location});
+				this.setState({'isEdit' : false});
 	    	},
 	    	error: (status) => {
 	    		var res = JSON.parse(status.responseText);
 	    		this.setState({'showError': res.err.message})
 	    	}
 	    });
-
-		console.log(this.state)
 	}
 
 	componentDidMount(){
@@ -73,6 +81,9 @@ export default class Profile extends Component{
 			$.ajax({
 				url: properties.users+'/'+window.sessionStorage.getItem('userId'),
 				method: 'get',
+				headers : {
+					"x-access-token": window.sessionStorage.getItem('token')
+				},
 				success: (result) => {
 					properties.userDetails = result;
 					this.setState({userDetails: result});
@@ -80,6 +91,9 @@ export default class Profile extends Component{
 					this.setState({'location': result.location});
 		    	},
 		    	error: (status)=>{
+		    		if(status.status === 401){
+		    			document.location.href= "/login";
+		    		}
 		    		var res = JSON.parse(status.responseText);
 		    		this.setState({'showError': res.err.message})
 		    	}
@@ -97,6 +111,10 @@ export default class Profile extends Component{
 				<TopNav path={this.props.routes[this.props.routes.length-1].path} />
 				<div className="loginBox clearfix">
 					<h3>Hello, {this.state.userDetails.firstName} {this.state.userDetails.lastName}</h3>
+					{this.state.userDetails.username ?
+						<img src={properties.serverHost+this.state.userDetails.username+'.jpg'} alt={this.state.userDetails.firstName} className="profilePicture" />
+						:null
+					}
 					{this.state.showError ?
 	 					<div className="error">
 	 						{this.state.showError}
@@ -168,6 +186,16 @@ export default class Profile extends Component{
 								<span>{this.state.userDetails.location}</span>
 							}
 						</div>
+
+						<div className="control">
+							{this.state.isEdit ? 
+								<div>
+									<label htmlFor="profilePic">Choose your profile pic</label>
+									<input type="file" id="profilePic" className="inputClass" onChange={this.myProfilePic} />
+								</div>
+								:null
+							}
+			            </div>
 
 						<div className="control">
 							{this.state.isEdit ? 

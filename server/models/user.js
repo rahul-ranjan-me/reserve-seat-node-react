@@ -18,7 +18,8 @@ var User = new Schema({
 	gender: String,
 	mobile: String,
 	email: String,
-	location: String
+	location: String,
+	profilePic: String
 });
 
 User.plugin(passportLocalMongoose);

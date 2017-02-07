@@ -93,7 +93,8 @@ router.post('/login', (req, res, next) => {
 					gender: user.gender,
 					location: user.location,
 					mobile: user.mobile,
-					username: user.username
+					username: user.username,
+					profilePic: user.profilePic
 				}
 			})
 		})
@@ -107,12 +108,60 @@ router.get('/logout', (req, res) => {
 	});
 });
 
-router.route('/:username')
-	.get((req, res, next) => {
-		User.findById(req.params.username, (err, user) => {
+router.route('/:userId')
+	.get(Verify.verifyOrdinaryUser, (req, res, next) => {
+		User.findById(req.params.userId, (err, user) => {
 			if(err) throw err;
 			res.json(user);
 		});
+	})
+	.put(Verify.verifyOrdinaryUser, (req, res, next) => {
+		var toUpdate = {};
+		for(var x in req.body){
+			if(x){
+				toUpdate[x] = req.body[x];
+			}
+		}
+		
+		User.findByIdAndUpdate(req.params.userId, { $set:
+			toUpdate
+		},
+		{
+			new:true
+		}, (err, user) => {
+			if(err) throw err;
+			var dataToSend = {
+				id: user._id,
+				admin: user.admin,
+				birthDay: user.birthDay,
+				birthMonth: user.birthMonth,
+				birthYear: user.birthYear,
+				email: user.email,
+				firstName: user.firstName,
+				lastName: user.lastName,
+				gender: user.gender,
+				location: user.location,
+				mobile: user.mobile,
+				username: user.username
+			}
+
+			if(!req.files || !req.files.profilePic){
+				return res.status(200).json(dataToSend);
+			}
+
+			var profilePic = req.files.profilePic,
+				fileType = profilePic.name.substr(profilePic.name.lastIndexOf('.'), profilePic.name.length);
+
+			profilePic.mv(config.fileUploadURL+user.username+fileType, function(err) {
+				if (err) {
+					res.status(500).send(err);
+				}else {
+					return res.status(200).json(dataToSend);
+				}
+			});
+
+		});
+
 	});
 
 module.exports = router;
