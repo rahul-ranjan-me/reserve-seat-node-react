@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router';
 import $ from 'jquery';
+import Select from 'react-select';
 import { browserHistory } from 'react-router';
 import properties from '../config';
-
+import 'react-select/dist/react-select.css';
 
 require('../../scss/login.scss');
 

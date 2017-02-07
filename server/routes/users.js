@@ -84,7 +84,7 @@ router.post('/login', (req, res, next) => {
 				userDetails: {
 					id: user._id,
 					admin: user.admin,
-					birthday: user.birthday,
+					birthDay: user.birthDay,
 					birthMonth: user.birthMonth,
 					birthYear: user.birthYear,
 					email: user.email,

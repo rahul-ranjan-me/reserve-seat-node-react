@@ -17,47 +17,13 @@ export default class Login extends Component{
 		this.locationSelect = this.locationSelect.bind(this);
 
 		this.state = {
-			'showError': false,
-			'birthMonth' : 'Please select',
-			'gender' : 'Please select',
-			'location' : 'Please select'
+			'showError': false
 		};
 
 		this.form = [
 			'firstName', 'lastName', 'username', 'password', {type: 'birthMonth'}, 'birthDay',
 			'birthYear', {type: 'gender'}, 'mobile', 'email', {type: 'location'} 
 		]
-
-		this.monthOptions = [
-			{ value: 'January', label: 'January'},
-			{ value: 'February', label: 'February'},
-			{ value: 'March', label: 'March'},
-			{ value: 'April', label: 'April'},
-			{ value: 'May', label: 'May'},
-			{ value: 'June', label: 'June'},
-			{ value: 'July', label: 'July'},
-			{ value: 'August', label: 'August'},
-			{ value: 'September', label: 'September'},
-			{ value: 'October', label: 'October'},
-			{ value: 'November', label: 'November'},
-			{ value: 'December', label: 'December'}
-		];
-
-		this.genderOptions = [
-			{ value: 'Female', label: 'Female'},
-			{ value: 'Male', label: 'Male'},
-			{ value: 'Other', label: 'Other'}
-		];
-
-		this.locationOptions = [
-			{ value: 'India', label: 'India'},
-			{ value: 'United Kingdom', label: 'United Kingdom'},
-			{ value: 'United States', label: 'United States'},
-			{ value: 'Singapore', label: 'Singapore'},
-			{ value: 'Brazil', label: 'Brazil'},
-			{ value: 'Australia', label: 'Australia'},
-		];
-
 	}
 
 	myProfilePic(event){
@@ -143,7 +109,7 @@ export default class Login extends Component{
 							<Select
 							    name="birthMonth"
 							    value={this.state.birthMonth}
-							    options={this.monthOptions}
+							    options={properties.monthOptions}
 							    onChange={this.monthSelect}
 							    className="select-inline"
 							/>
@@ -157,7 +123,7 @@ export default class Login extends Component{
 						<Select
 						    name="gender"
 						    value={this.state.gender}
-						    options={this.genderOptions}
+						    options={properties.genderOptions}
 						    onChange={this.genderSelect}
 						/>
 					</div>
@@ -177,7 +143,7 @@ export default class Login extends Component{
 						<Select
 						    name="location"
 						    value={this.state.location}
-						    options={this.locationOptions}
+						    options={properties.locationOptions}
 						    onChange={this.locationSelect}
 						/>
 					</div>
