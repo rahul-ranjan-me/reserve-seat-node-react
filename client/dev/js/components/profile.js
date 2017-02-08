@@ -209,11 +209,7 @@ export default class Profile extends Component{
 							
 						</div>
 
-					</form>
-
-
-
-					
+					</form>					
 				</div>
 			</div>
 		)

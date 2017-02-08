@@ -1,4 +1,4 @@
-.container-seat-chooser{
+add.container-seat-chooser{
 	position:relative;
 	height:100%;
 }
@@ -242,6 +242,15 @@
 		    cursor: pointer;
 		}
 	}
+
+	.bulkUpload{
+		padding: 10px;
+	    border-top: 1px solid #333;
+	    background: #333;
+	    color: #e6e6e6;
+	    position: absolute;
+	    bottom: 0px;
+	}
 }
 
 .seatBucket .submitRequest button[disabled]{
@@ -353,4 +362,19 @@
 
 .deleteInventory:hover{
 	background:#882356;
+}
+
+.deleteAllInventory{
+	width:80%;
+
+	button{
+		padding:10px 30px;
+		color:#fff;
+		background:#ff0000;
+		font-weight:bold;
+		border:none;
+		margin-top:-40px;
+		float:right;
+		cursor:pointer;
+	}
 }

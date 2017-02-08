@@ -83,7 +83,7 @@ class InventoryViewer extends Component{
 						</div>
 						
 						{inventory.details.desktopDetails.isWebCamAvailable ? <span className="webcam"><i className="fa fa-camera" aria-hidden="true"></i></span> : null}
-						{inventory.details.desktopDetails.isHeadphoneAvailable ? <span className="headphone"><i className="fa fa-headphones" aria-hidden="true"></i></span> : null}
+						{inventory.details.desktopDetails.isHeadPhoneAvailable ? <span className="headphone"><i className="fa fa-headphones" aria-hidden="true"></i></span> : null}
 					</div>
 
 				</li>

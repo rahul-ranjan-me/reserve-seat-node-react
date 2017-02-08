@@ -1,11 +1,15 @@
 var express = require('express'),
 	bodyParser = require('body-parser'),
 	inventoryRouter = express.Router(),
+	fileUpload = require('express-fileupload'),
+	xls = require('excel'),
 	mongoose = require('mongoose'),
 	Inventories = require('../models/inventories'),
 	Verify = require('./verify');
 
 inventoryRouter.use(bodyParser.json());
+inventoryRouter.use(fileUpload());
+
 
 inventoryRouter.route('/')
 	.get(Verify.verifyOrdinaryUser, (req, res, next) => {
@@ -81,5 +85,55 @@ inventoryRouter.route('/:inventoryId')
 			});
 		});
 	});
+
+inventoryRouter.route('/bulkUpload')
+	.post(Verify.verifyOrdinaryUser, (req, res, next) => {
+		var bulkUploadFile = req.files.bulkUploadFile;
+		bulkUploadFile.mv(config.bulkUploadURL+bulkUploadFile.name, function(err) {
+			if (err) {
+				res.status(500).send(err);
+			}else {
+				
+				xls(config.bulkUploadURL+bulkUploadFile.name, function(err, sheet) {
+				    if(err) throw err;
+
+				    var sheetLength = sheet.length,
+				    	recordToSend = [];
+
+				    sheet.map( (row) => {
+				    	row[1] = row[1] == '1' ? true : false;
+				    	row[2] = row[2] == '1' ? true : false;
+				    	var record = {
+				    		details: {
+				    			desktopDetails: {
+				    				isHeadPhoneAvailable: row[1],
+				    				isWebCamAvailable: row[2],
+				    				seat: row[3]
+				    			}
+				    		},
+				    		location: row[0],
+				    		type: row[4]
+				    	};
+
+				    	recordToSend.push(record);
+				    });
+
+				    Inventories.collection.insert(recordToSend, (err, docs) => {
+				    	if(err) throw err;
+					    
+						Inventories.find({}, (err, inventory) => {
+							if(err) throw err;
+							res.json(inventory);
+						});
+					    
+				    });
+				});
+				
+			}
+		});
+
+		
+	});
+
 
 module.exports = inventoryRouter;

@@ -35,7 +35,7 @@ class SeatViewer extends Component{
 							</div>
 							
 							{availableSeat.details.desktopDetails.isWebCamAvailable ? <span className="webcam"><i className="fa fa-camera" aria-hidden="true"></i></span> : null}
-							{availableSeat.details.desktopDetails.isHeadphoneAvailable ? <span className="headphone"><i className="fa fa-headphones" aria-hidden="true"></i></span> : null}
+							{availableSeat.details.desktopDetails.isHeadPhoneAvailable ? <span className="headphone"><i className="fa fa-headphones" aria-hidden="true"></i></span> : null}
 						</div>
 
 					</li>
