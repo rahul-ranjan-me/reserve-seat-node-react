@@ -41,7 +41,6 @@ class ListchosenSeats extends Component{
 
 	doBulkUpload(ev){
 		ev.preventDefault();
-		console.log(this.bulkUploadFile);
 		let formData = new FormData();
 		formData.append("bulkUploadFile", this.bulkUploadFile);
 		$.ajax({

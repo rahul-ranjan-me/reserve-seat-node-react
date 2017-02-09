@@ -18,7 +18,6 @@ class Inventory extends Component{
 		var promptDelete = confirm('Are you sure you want to delete all the records?');
 
 		if(promptDelete){
-			console.log('delete all');
 			$.ajax({
 				url: properties.inventory,
 				headers : {
@@ -27,7 +26,6 @@ class Inventory extends Component{
 				method: 'delete',
 				dataType : 'JSON',
 				success: (result) => {
-					console.log(result);
 					this.props.inventoryDELETEALL();
 		    	}
 		    });
