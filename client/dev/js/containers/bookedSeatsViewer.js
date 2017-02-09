@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import properties from '../config';
-import {selectInventory, inventoryGET, inventoryDELETE, clearSelectionInventory} from '../actions/index';
+import moment from 'moment';
+import {selectInventory, inventoryGET, clearSelectionInventory} from '../actions/index';
 import $ from 'jquery';
 
 require('../../scss/seatViewer.scss');
 
-class InventoryViewer extends Component{
+class BookedSeatsViewer extends Component{
 	constructor(props){
 		super(props);
 		this.getInventory = this.getInventory.bind(this);
@@ -16,16 +17,15 @@ class InventoryViewer extends Component{
 	}
 
 	getInventory(){
-		var that = this;
 		$.ajax({
-			url: properties.inventory,
+			url: properties.inventory+'/user/'+window.sessionStorage.getItem('userId'),
 			headers : {
 				"x-access-token": window.sessionStorage.getItem('token')
 			},
 			method: 'get',
 			dataType : 'JSON',
-			success: function(result){
-				that.props.inventoryGET(result);
+			success: (result) => {
+				this.props.inventoryGET(result);
 	    	},
 	    	error: function(s){
 	    		if(s.status === 401){
@@ -36,27 +36,32 @@ class InventoryViewer extends Component{
 	}
 
 	deleteInventory(){
-		var that = this;
-		window.setTimeout(function(){
-			$.ajax({
-				url: properties.inventory+'/'+that.props.chosenInventory._id,
-				headers : {
-					"x-access-token": window.sessionStorage.getItem('token')
-				},
-				method: 'delete',
-				dataType : 'JSON',
-				success: function(result){
-					that.props.inventoryGET(result);
-					window.setTimeout(function(){
-						that.props.clearSelectionInventory(that.props.chosenInventory);
-						that.props.selectInventory(that.props.chosenInventory);
-					}, 200);
-		    	}
-		    });
-		}, 500);
+		var confirmMe = confirm('Are you sure  you want to cancel the booking?');
+		if(confirmMe){
+			window.setTimeout( () => {
+				$.ajax({
+					url: properties.inventory+'/user/'+window.sessionStorage.getItem('userId')+'/'+this.props.chosenInventory._id,
+					headers : {
+						"x-access-token": window.sessionStorage.getItem('token')
+					},
+					method: 'delete',
+					dataType : 'JSON',
+					success: (result) => {
+						this.props.inventoryGET(result);
+						window.setTimeout(() => {
+							this.props.clearSelectionInventory(this.props.chosenInventory);
+							this.props.selectInventory(this.props.chosenInventory);
+						}, 200);
+			    	}
+			    });
+			}, 500);
+		}
 	}
 
 	createListItems(){
+		const formatDate = (dateString) => {
+			return moment(dateString, "x").format('Do MMM YYYY');
+		}
 		return this.props.inventories.map((inventory) => {
 			var cssClass = inventory._id === this.props.chosenInventory._id ? 'selected seat' : 'seat',
 				imageClass = inventory.type === 'Desktop' ? 'fa fa-desktop' : null;
@@ -75,11 +80,8 @@ class InventoryViewer extends Component{
 						<div className="meta-info">
 							<p>Location: <strong>{inventory.location}</strong></p>	
 							<p>Seat: <strong>{inventory.details.desktopDetails.seat}</strong></p>
-							<p>Booked by: <strong>
-							{	inventory.bookedBy && inventory.bookedBy.length > 0 ? 
-								inventory.bookedBy
-								: "Not booked"  }
-							</strong></p>
+							<p>Booked from: <strong>{formatDate(inventory.bookedFrom)}</strong></p>
+							<p>Booked to: <strong>{formatDate(inventory.bookedTill)}</strong></p>
 						</div>
 						
 						{inventory.details.desktopDetails.isWebCamAvailable ? <span className="webcam"><i className="fa fa-camera" aria-hidden="true"></i></span> : null}
@@ -92,8 +94,9 @@ class InventoryViewer extends Component{
 	}
 
 	render(){
+		const mainContainerWidth = Object.keys(this.props.chosenInventory).length ? {width:'80%'} : {width:'100%'};
 		return (
-			<div className='seats contract'>
+			<div className='seats contract' style={mainContainerWidth}>
 				<ul>
 					{this.createListItems()}
 				</ul>
@@ -114,9 +117,8 @@ function matchDispatchToProps(dispatch){
 	return bindActionCreators({
 		selectInventory : selectInventory,
 		inventoryGET : inventoryGET,
-		inventoryDELETE : inventoryDELETE,
 		clearSelectionInventory : clearSelectionInventory
 	}, dispatch);
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(InventoryViewer);
+export default connect(mapStateToProps, matchDispatchToProps)(BookedSeatsViewer);

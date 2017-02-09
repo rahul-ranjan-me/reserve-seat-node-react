@@ -31,6 +31,7 @@ var inventorySchema = new Schema(
 			}
 		},
 		bookedBy: String,
+		bookedByUserId: String,
 		bookedFrom: Number,
 		bookedOn: Number,
 		bookedTill: Number

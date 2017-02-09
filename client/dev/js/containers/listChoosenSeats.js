@@ -52,18 +52,41 @@ class ListchosenSeats extends Component{
 	}
 
 	handleChangeEndDate(date) {
-	    this.setState({
+		this.setState({
 	      endDate: date
 	    });
+	}
+
+	componentDidMount(){
+		if(!properties.userDetails){
+			$.ajax({
+				url: properties.users+'/'+window.sessionStorage.getItem('userId'),
+				method: 'get',
+				headers : {
+					"x-access-token": window.sessionStorage.getItem('token')
+				},
+				success: (result) => {
+					properties.userDetails = result;
+		    	},
+		    	error: (status)=>{
+		    		if(status.status === 401){
+		    			document.location.href= "/login";
+		    		}
+		    		var res = JSON.parse(status.responseText);
+		    		this.setState({'showError': res.err.message})
+		    	}
+		    });
+		}
 	}
 
 	makeBooking(){
 
 		var that = this, data = {
-			bookedFrom: moment().utc(this.state.startDate).toDate().valueOf(),
-			bookedTill: moment().utc(this.state.endDate).toDate().valueOf(),
-			bookedOn : moment().utc().toDate().valueOf(),
-			bookedBy : 'Rahul Ranjan',
+			bookedFrom: moment(this.state.startDate, "x").toDate().valueOf(),
+			bookedTill: moment(this.state.endDate, "x").toDate().valueOf(),
+			bookedOn : moment().toDate().valueOf(),
+			bookedBy : properties.userDetails.firstName +' '+properties.userDetails.lastName,
+			bookedByUserId : window.sessionStorage.getItem('userId'),
 			ids: []
 		}
 
@@ -111,7 +134,7 @@ class ListchosenSeats extends Component{
 	}
 
 	render(){
-		const chooseSeatHeight = this.props.chosenSeats.length ? {'opacity':1, height:'100%'} : null;
+		const chooseSeatHeight = this.props.chosenSeats.length ? {'opacity':1, height:'99%'} : null;
 		const acknowledgementHeight = this.state.showAcknowledgement ? {'height': '100%'} : null;
 		return (
 			<div className="seatBucket" style={chooseSeatHeight}>

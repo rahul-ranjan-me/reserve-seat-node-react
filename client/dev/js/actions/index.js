@@ -47,6 +47,12 @@ export const inventoryDELETE = (inventory) => {
 	}
 };
 
+export const inventoryDELETEALL = () => {
+	return {
+		type: 'INVENTORY_DELETEALL'
+	}
+};
+
 export const selectInventory = (inventory) => {
 	return {
 		type: 'INVENTORY_SELECTED',

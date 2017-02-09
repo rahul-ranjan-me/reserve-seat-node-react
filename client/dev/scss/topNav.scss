@@ -40,4 +40,10 @@ $primary: #006699;
     cursor: pointer;
     border-right:none;
     border-left:1px solid #dcdcdc;
+    transition:background 400ms;
+}
+
+.main-nav li.logout:hover{
+	background:#dcdcdc;
+	color:#333;
 }

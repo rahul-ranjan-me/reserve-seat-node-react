@@ -37,6 +37,7 @@ inventoryRouter.route('/')
 				{
 					isAvailable : false,
 					bookedBy : req.body.bookedBy,
+					bookedByUserId : req.body.bookedByUserId,
 					bookedFrom : req.body.bookedFrom,
 					bookedOn : req.body.bookedOn,
 					bookedTill : req.body.bookedTill
@@ -80,6 +81,47 @@ inventoryRouter.route('/:inventoryId')
 		Inventories.findByIdAndRemove(req.params.inventoryId, (err, resp) => {
 			if(err) throw err;
 			Inventories.find({}, (err, inventory) => {
+				if(err) throw err;
+				res.json(inventory);
+			});
+		});
+	});
+
+inventoryRouter.route('/user/:userId')
+	.get(Verify.verifyOrdinaryUser, (req, res, next) => {
+		Inventories.find({'bookedByUserId': req.params.userId}, (err, inventory) => {
+			if(err) throw err;
+			res.json(inventory);
+		});
+	})
+
+inventoryRouter.route('/user/:userId/:inventoryId')
+	.put(Verify.verifyOrdinaryUser, (req, res, next) => {
+		Inventories.findByIdAndUpdate(req.params.inventoryId, {$set: {
+			bookedFrom : req.body.bookedFrom,
+			bookedTill : req.body.bookedTill
+		}}, {
+			new:true
+		}, (err, inventory) => {
+			if(err) throw err;
+			res.json(inventory);
+		});
+	})
+	.delete(Verify.verifyOrdinaryUser, (req, res, next) => {
+		Inventories.findByIdAndUpdate(req.params.inventoryId, {$set:
+			{
+				isAvailable : true,
+				bookedBy : null,
+				bookedByUserId : null,
+				bookedFrom : null,
+				bookedOn : null,
+				bookedTill : null
+			}
+		}, {
+			new:true
+		}, (err, inventory) => {
+			if(err) throw err;
+			Inventories.find({'bookedByUserId': req.params.userId}, (err, inventory) => {
 				if(err) throw err;
 				res.json(inventory);
 			});

@@ -21,6 +21,14 @@ export default class Header extends Component {
 				{
 					label: 'Add/Update inventory',
 					route: 'inventory'
+				},
+				{
+					label: 'Your booked seats',
+					route: 'bookedSeats'
+				},
+				{
+					label: 'Profile',
+					route: 'profile'
 				}
 			]
 		}
@@ -60,9 +68,6 @@ export default class Header extends Component {
 				<ul>
 					{this.state.links.map(this.createLinksWrapper)}
 					<li className="logout" onClick={this.logout}><span>Logout</span></li>
-					<li>
-						<Link to='profile'>Profile</Link>
-					</li>
 				</ul>
 			</nav>
 		)

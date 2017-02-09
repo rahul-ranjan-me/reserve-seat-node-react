@@ -30,6 +30,8 @@ export default function (state = [], action){
 			}
 
 			return toDeleteInventory;
+		case 'INVENTORY_DELETEALL' :
+			return [];
 		case 'INVENTORY_UPDATE' :
 			let toUpdateInventory = _.cloneDeep(state);
 			action.payload.map( (obj, key) => {

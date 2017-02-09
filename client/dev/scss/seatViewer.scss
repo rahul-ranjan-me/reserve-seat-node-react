@@ -90,15 +90,16 @@ add.container-seat-chooser{
 }
 
 .seatBucket{
-	width: 20%;
+	width: 19%;
     background: #ccc;
     color: #333;
     height: 0;
     opacity: 0;
     top: 0;
     position: absolute;
-    right: 0;
+    right: 10px;
     transition: all 500ms;
+    margin-top: 55px;
 }
 
 .seatBucket {
@@ -158,16 +159,17 @@ add.container-seat-chooser{
 }
 
 .addEditForm{
-	width: 20%;
+	width: 19%;
     background: #ccc;
     color: #333;
-    height: 100%;
+    height: 97%;
     opacity: 1;
-    top:0;
+    top: 0;
     position: absolute;
-    right: 0;
-    transition:all 500ms;
-    z-index:2
+    right: 10px;
+    transition: all 500ms;
+    z-index: 2;
+    margin-top: 58px;
 }
 
 .addEditForm{
@@ -250,6 +252,10 @@ add.container-seat-chooser{
 	    color: #e6e6e6;
 	    position: absolute;
 	    bottom: 0px;
+
+	    input{
+	    	width:100%
+	    }
 	}
 }
 
@@ -376,5 +382,11 @@ add.container-seat-chooser{
 		margin-top:-40px;
 		float:right;
 		cursor:pointer;
+		transition:background 400ms;
+	}
+
+	button:hover{
+		background: #dcdcdc;
+    	color: #333;
 	}
 }
