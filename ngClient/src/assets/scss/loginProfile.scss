@@ -1,0 +1,182 @@
+.loginBox{
+	width: 500px;
+    background: #000;
+    margin: 10px auto;
+    padding: 20px;
+    border-radius: 10px;
+    position:relative;
+}
+
+.loginBox{
+	h3{
+		font-size:20px;
+		margin-bottom:10px;
+	}
+
+	.control{
+		margin-bottom:15px;
+	}
+
+	.control:last-child{
+		margin-bottom:0;
+	}
+
+	.control {
+		label{
+			font-size: 13px;
+		    display: block;
+		    margin-bottom: 5px;
+		    color: rgba(255,255,255,.6);
+		}
+
+		.input{
+			width:98%;
+			display:block;
+			height:20px;
+			padding:5px;
+			border-radius:5px;
+			border:1px solid #666;
+			background:#313131;
+			color:rgba(255,255,255,.9);
+		}
+
+		.input-inline{
+			width:30%;
+			display:inline-block;
+			margin-right:15px;
+		}
+
+		.select-inline{
+			width:36%;
+			display:inline-block;
+			margin-right:15px;
+			float:left;
+		}
+
+		button{
+			background:green;
+			float:right;
+			color:#fff;
+			padding:10px;
+			border:none;
+			border-radius:7px;
+			font-size:15px;
+			text-shadow:1px #666;
+			width:100px;
+			margin:10px auto 0;
+			display:block;
+			cursor:pointer;
+		}
+
+		.btnCancel{
+			background:#0685ad;
+			margin-right:10px;
+		}
+
+		input[type="checkbox"]{
+			width:auto;
+			display:inline-block;
+			vertical-align:middle;
+		}
+
+		.inputClass{
+			display:block;
+		}
+	}
+
+	.control.birthday .input-inline{
+		width:25%
+	}
+
+	div.register{
+		display:block;
+		clear:both;
+		background:#1f1f1f;
+		padding:10px;
+		margin-top:10px;
+	}
+
+	div.register{
+		a{
+			color:#fff
+		}
+	}
+
+	div.error{
+	    padding: 10px;
+	    background: #6b2611;
+	    border-radius: 5px;
+	    margin-bottom: 10px;
+	}
+
+	.Select-control{
+		background-color: #313131;
+		border-color: #666;
+		color:rgba(255,255,255,.9);
+	}
+
+	.has-value.Select--single > .Select-control .Select-value .Select-value-label, .has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label{
+		color:rgba(255,255,255,.9);
+	}
+
+}
+
+.profilePic {
+	margin-bottom:10px;
+	
+	input:first-child{
+		opacity:1 !important;
+	}
+}
+
+.profilePicture{
+	width: 100px;
+    height: 100px;
+    position: absolute;
+    right: 5px;
+    border-radius: 60px;
+    top: 5px;
+}
+
+.profile{
+	width: 500px;
+    background: #000;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.profile{
+	p {
+		margin-bottom:10px;
+	}
+
+	p {
+		label{
+			font-size:15px;
+		}
+
+		input{
+			width:98%;
+			display:block;
+			height:20px;
+			padding:5px;
+			border-radius:5px;
+			margin-top:5px;
+			border:1px solid #666;
+		}
+
+		button{
+			background:green;
+			float:right;
+			color:#fff;
+			padding:10px;
+			border:none;
+			border-radius:7px;
+			font-size:15px;
+			text-shadow:1px #666;
+			display:block;
+			cursor:pointer;
+		}
+	}
+}

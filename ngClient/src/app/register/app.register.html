@@ -1,0 +1,86 @@
+<div class="loginBox clearfix">
+	<h3>Register</h3>
+
+	<!-- {this.state.showError ?
+			<div class="error">
+				{this.state.showError}
+			</div>: null
+	} -->
+	<form onSubmit={this.registerMe}>
+		<div class="control">
+			<label htmlFor="firstName">Name</label>
+			<div class="wrap-inline">
+				<input class="input input-inline" id="firstName" ref="firstName" placeholder="First Name" type="text" />
+				<input class="input input-inline" id="lastName" ref="lastName" placeholder="Last Name" type="text" />
+			</div>
+		</div>
+		<div class="control">
+			<label htmlFor="username">Choose your username</label>
+			<input class="input" id="username" ref="username" type="text" />
+		</div>
+		<div class="control">
+			<label htmlFor="password">Password</label>
+			<input class="input" id="password" ref="password" type="password" />
+		</div>
+
+		<div class="control birthday clearfix">
+			<label htmlFor="birthday">Birthday</label>
+			<div class="wrap-inline clearfix">
+				<!-- <Select
+				    name="birthMonth"
+				    value={this.state.birthMonth}
+				    options={properties.monthOptions}
+				    onChange={this.monthSelect}
+				    class="select-inline"
+				/> -->
+				<input class="input input-inline" id="day" ref="birthDay" placeholder="Day" type="text" />
+				<input class="input input-inline" id="year" ref="birthYear" placeholder="Year" type="text" />
+			</div>
+		</div>
+
+		<div class="control">
+			<label htmlFor="gender">Gender</label>
+			<!-- <Select
+			    name="gender"
+			    value={this.state.gender}
+			    options={properties.genderOptions}
+			    onChange={this.genderSelect}
+			/> -->
+		</div>
+
+		<div class="control">
+			<label htmlFor="mobile">Mobile</label>
+			<input class="input" id="mobile" ref="mobile" placeholder="+91-9XXXXXXXXX" type="text" />
+		</div>
+
+		<div class="control">
+			<label htmlFor="email">Email</label>
+			<input class="input" id="email" ref="email" placeholder="abc@xyz.com" type="email" />
+		</div>
+
+		<div class="control">
+			<label htmlFor="location">Location</label>
+			<!-- <Select
+			    name="location"
+			    value={this.state.location}
+			    options={properties.locationOptions}
+			    onChange={this.locationSelect}
+			/> -->
+		</div>
+
+		<div class="control">
+			<label htmlFor="profilePic">Choose your profile pic</label>
+			<input type="file" id="profilePic" class="inputClass" onChange={this.myProfilePic} />
+        </div>
+
+		<div class="control">
+			<label htmlFor="admin">
+				<input class="input" id="admin" ref="admin" type="checkbox" /> isAdmin?
+			</label>
+		</div>
+
+		<p class="control clearfix">
+			<button type="submit" onClick={this.registerMe}>Register</button>
+		</p>
+	</form>
+</div>

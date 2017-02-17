@@ -1,0 +1,27 @@
+<div class="loginBox clearfix">
+	<h3>Login</h3>
+
+	<!-- {this.state.showError ?
+			<div class="error">
+				{this.state.showError}
+			</div>: null
+	} -->
+
+	<div class="control">
+		<label htmlFor="username">
+			<input class="input" id="username" ref="username" placeholder="Username" type="text" />
+		</label>
+	</div>
+	<div class="control">
+		<label htmlFor="password">
+			<input class="input" id="password" ref="password" placeholder="Password" type="password" />
+		</label>
+	</div>
+	<div class="control clearfix">
+		<button type="submit" onClick={this.loginMe}>Login</button>
+	</div>
+
+	<div class="register clearfix">
+		<a routerLink="/register">Click here to register</a>
+	</div>
+</div>
