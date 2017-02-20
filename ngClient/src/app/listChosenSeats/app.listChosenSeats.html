@@ -1,0 +1,60 @@
+<div class="seatBucket">
+
+	<h2>Choosen Seats</h2>
+	
+	<span class="clear-all" (click) = this.removeAllSeats(this.props.chosenSeats)><i class="fa fa-times" aria-hidden="true"></i> Clear all</span>
+	
+	<ul>
+		<li>list to submit</li>
+	</ul>
+
+	<div class="dateChooser">
+		<span>
+			<strong>From:</strong>
+			<!-- <DatePicker
+				class='dateFrom'
+				popoverTargetOffset='0px -28px'
+				isClearable={true}
+				dateFormat="DD/MM/YYYY"
+	        	onChange={this.handleChangeStartDate}
+	        	minDate = {moment()}
+	        	maxDate = {this.state.endDate}
+	        	selected={this.state.startDate}
+	        	 /> -->
+	    </span>
+
+	    <span>
+	    	<strong>To:</strong>
+		    <!-- <DatePicker
+		    	class='dateTo'
+				popoverTargetOffset='0px -28px'
+		        isClearable={true}
+		        dateFormat="DD/MM/YYYY"
+		        onChange={this.handleChangeEndDate}
+		        minDate = {this.state.startDate}
+		        selected={this.state.endDate}
+		         /> -->
+		</span>
+	</div>		
+
+	<div class="submitRequest">
+		<button type="button" 
+			 (click)=this.makeBooking()>Submit</button>
+	</div>
+
+	<div class="acknowledgement" style={acknowledgementHeight}>
+
+		<div class="acknowledgeContainer">
+			<h4 *ngIf="this.chosenSeats.length > 1">Your following bookings have been confirmed</h4> 
+			<h4 *ngIf="this.chosenSeats.length == 1">Your following booking has been confirmed</h4>
+			<ul>
+				<li>Acknowledgement list</li>
+			</ul>
+
+			<div class="submitAcknowledgement">
+				<button type="button" onClick={this.acknowledgementConfirmed}>OK</button>
+			</div>
+		</div> 
+	</div>
+
+</div>

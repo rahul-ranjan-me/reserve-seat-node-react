@@ -1,25 +1,25 @@
 <div class="loginBox clearfix">
 	<h3>Login</h3>
 
-	<!-- {this.state.showError ?
-			<div class="error">
-				{this.state.showError}
-			</div>: null
-	} -->
+	<div class="error" *ngIf="this.showError">
+		{{this.showError}}
+	</div>
 
-	<div class="control">
-		<label htmlFor="username">
-			<input class="input" id="username" ref="username" placeholder="Username" type="text" />
-		</label>
-	</div>
-	<div class="control">
-		<label htmlFor="password">
-			<input class="input" id="password" ref="password" placeholder="Password" type="password" />
-		</label>
-	</div>
-	<div class="control clearfix">
-		<button type="submit" onClick={this.loginMe}>Login</button>
-	</div>
+	<form (submit) = this.loginMe(loginForm) #loginForm="ngForm">
+		<div class="control">
+			<label htmlFor="username">
+				<input class="input" id="username" ngModel name="username" placeholder="Username" type="text" />
+			</label>
+		</div>
+		<div class="control">
+			<label htmlFor="password">
+				<input class="input" id="password" ngModel name="password" placeholder="Password" type="password" />
+			</label>
+		</div>
+		<div class="control clearfix">
+			<button type="submit">Login</button>
+		</div>
+	</form>
 
 	<div class="register clearfix">
 		<a routerLink="/register">Click here to register</a>

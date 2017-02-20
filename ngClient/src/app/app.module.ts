@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -13,10 +13,16 @@ import { RegisterComponent } from './register/app.register.component';
 import { BookedSeatsComponent } from './bookedSeats/app.bookedSeats.component';
 import { LoginComponent } from './login/app.login.component';
 import { ChooseSeatComponent } from './chooseSeat/app.chooseSeat.component';
+import { SeatViewerComponent } from './seatViewer/app.seatViewer.component';
+import { ListChosenSeatsComponent } from './listChosenSeats/app.listChosenSeats.component';
 import { InventoryComponent } from './inventory/app.inventory.component';
 import { PageNotFoundComponent } from './pageNotFound/app.pageNotFound.component';
 
-
+import {RegisterService} from './register/app.register.service';
+import {LoginService} from './login/app.login.service';
+import {TopNavService} from './structure/topNav/app.topNav.service';
+import {SeatViewerService} from './seatViewer/app.seatViewer.service';
+import {ListChosenSeatsService} from './listChosenSeats/app.listChosenSeats.service';
 
 const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent },
@@ -45,6 +51,8 @@ const appRoutes: Routes = [
     BookedSeatsComponent,
     LoginComponent,
     ChooseSeatComponent,
+    SeatViewerComponent,
+    ListChosenSeatsComponent,
     InventoryComponent,
     PageNotFoundComponent,
   ],
@@ -52,9 +60,16 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [
+    RegisterService,
+    LoginService,
+    TopNavService,
+    SeatViewerService,
+    ListChosenSeatsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

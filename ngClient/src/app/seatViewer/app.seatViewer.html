@@ -1,0 +1,22 @@
+<div class="seats" [ngClass]="{'contract': this.chosenSeats.length, 'expand':!this.chosenSeats.length}">
+	<ul>
+		<li 
+			*ngFor="let availableSeat of this.availableSeats"
+			(click)=this.selectSeats(availableSeat)
+			class="seat"
+			[ngClass] ="{'selected': this.isSelected(availableSeat)}"
+		>
+			<div class="seatContainer">
+				<div class="desktop-image"><i [ngClass]="{'fa fa-desktop':availableSeat.type === 'Desktop'}" aria-hidden="true"></i></div>
+				
+				<div class="meta-info">
+					<p>Location: <strong>{{availableSeat.location}}</strong></p>	
+					<p>Seat: <strong>{{availableSeat.details.desktopDetails.seat}}</strong></p>
+				</div>
+				
+				<span class="webcam" *ngIf="availableSeat.details.desktopDetails.isWebCamAvailable"><i class="fa fa-camera" aria-hidden="true"></i></span>
+				<span *ngIf="availableSeat.details.desktopDetails.isHeadPhoneAvailable" class="headphone"><i class="fa fa-headphones" aria-hidden="true"></i></span>
+			</div>
+		</li>
+	</ul>
+</div>

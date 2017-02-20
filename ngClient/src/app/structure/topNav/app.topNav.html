@@ -1,3 +1,8 @@
-<h1>
-  {{title}}
-</h1>
+<nav class="main-nav clearfix">
+	<ul>
+		<li *ngFor = "let link of this.links">
+			<a routerLink={{link.route}}>{{link.label}}</a>
+		</li>
+		<li class="logout" (click)=this.logout()><span>Logout</span></li>
+	</ul>
+</nav>
