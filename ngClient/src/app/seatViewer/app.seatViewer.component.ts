@@ -20,7 +20,8 @@ export class SeatViewerComponent {
 					this.availableSeats = result;
 				},
 				(err) => {
-					if(err.status === 401){
+					let msg = JSON.parse(err._body);
+					if(err.status === 401 || msg.message === "No token provided!"){
 		    			this.router.navigate(['/login']);
 		    		}
 				}
